@@ -1,0 +1,58 @@
+import turtle
+import numpy as np
+
+turtle.shape('turtle')
+def circle (n, r):
+    for i in range(n):
+        turtle.forward(2*np.pi*r/n)
+        turtle.left(360/n)
+
+def hcircle (n, r):
+    for i in range(n//2):
+        turtle.forward(2*np.pi*r/n)
+        turtle.left(360/n)
+
+
+turtle.begin_fill()
+circle(100,150)
+turtle.color("yellow")
+turtle.end_fill()
+turtle.penup()
+turtle.left(90)
+turtle.forward(230)
+turtle.left(90)
+turtle.forward(50)
+turtle.color("black")
+turtle.pendown()
+turtle.begin_fill()
+circle(100,20)
+turtle.color("blue")
+turtle.end_fill()
+turtle.right(180)
+turtle.penup()
+turtle.forward(100)
+turtle.color("black")
+turtle.pendown()
+turtle.right(180)
+turtle.begin_fill()
+circle(100,20)
+turtle.color("blue")
+turtle.end_fill()
+turtle.penup()
+turtle.forward(50)
+turtle.left(90)
+turtle.forward(70)
+turtle.color("black")
+turtle.pendown()
+turtle.pensize(8)
+turtle.forward(30)
+turtle.penup()
+turtle.forward(10)
+turtle.right(90)
+turtle.forward(60)
+turtle.left(90)
+turtle.pendown()
+turtle.color("red")
+turtle.begin_fill()
+turtle.pensize(8)
+hcircle(100,60)
