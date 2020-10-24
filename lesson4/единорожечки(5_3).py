@@ -3,8 +3,8 @@ from pygame.draw import *
 
 pygame.init()
 screen = pygame.display.set_mode((500, 1000), 0, 32)
-uni = pygame.display.set_mode((500, 1000))
-screen.blit(uni, (0, 0))
+
+
 WHITE = (255, 250, 240)
 BLACK = (48, 44, 40)
 GREEN = (50, 205, 50)
@@ -109,6 +109,8 @@ pygame.draw.ellipse(screen, LGREEN, (0, 450, 100, 160), 5)
 pygame.draw.ellipse(screen, GREEN, (73, 500, 110, 140))
 pygame.draw.ellipse(screen, LGREEN, (73, 500, 110, 140), 5)
 
+uni = pygame.Surface((500,1000))
+uni.set_colorkey((0, 0, 0, 255))
 #UNICORN TAIL
 pygame.draw.ellipse(uni, LIGHT_PINK, (190, 626, 30, 17))
 pygame.draw.ellipse(uni, PINK, (187, 629, 40, 20))
@@ -164,8 +166,15 @@ pygame.draw.ellipse(uni, PURPLE, (270, 593, 40, 18))
 pygame.draw.ellipse(uni, PURPLE, (280, 545, 30, 18))
 pygame.draw.ellipse(uni, PINK, (270, 560, 40, 20))
 pygame.draw.ellipse(uni, LIME, (266, 572, 38, 18))
-
+uni = pygame.transform.scale(uni, (250, 500))
 uni = pygame.transform.flip(uni, True, False)
+screen.blit(uni, (250, 50))
+rev_screen = pygame.transform.flip(screen, True, False)
+screen.blit(rev_screen, (0, 0))
+pygame.display.update()
+uni = pygame.transform.scale(uni, (125, 250))
+uni = pygame.transform.flip(uni, True, False)
+screen.blit(uni, (0, 350))
 pygame.display.update()
 RUNNING = True
 
