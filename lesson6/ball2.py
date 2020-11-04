@@ -1,15 +1,15 @@
 import pygame
 from pygame.draw import *
 from random import randint
+
 pygame.init()
 
-FPS = 1
-#создание экрана и счета
-screen = pygame.display.set_mode((700, 700))
-f = open('score1.txt', 'w')
-f = open('score1.txt', 'r')
+FPS = 30
+screen = pygame.display.set_mode((800, 700))
 
-#цвета шариков
+maxx=800
+maxy=700
+
 RED = (255, 0, 0)
 BLUE = (0, 0, 255)
 YELLOW = (255, 255, 0)
@@ -19,67 +19,49 @@ CYAN = (0, 255, 255)
 BLACK = (0, 0, 0)
 COLORS = [RED, BLUE, YELLOW, GREEN, MAGENTA, CYAN]
 
-global x, y, r
-#новый шарик
+cdvig = [-3, -2, -1, 1, 2, 3]
+
+score = 0
+
 def new_ball():
-    global x, y, r
-    x = randint(10, 800)
-    y = randint(10, 700)
-    r = randint(20, 100)
-    color = COLORS[randint(0, 5)]
     circle(screen, color, (x, y), r)
-    dx = 2
-    dy = 2
-    # while True:
-    # # смена позиции
-    #     x += dx
-    #     y += dy
-    # # проверка границ
-    #     if x - dx < 0 or x + dx > 700:
-    #         dx = -dx
-    #     if y - dy < 0 or y + dy > 700:
-    #         dy = -dy
+
+
 
 
 pygame.display.update()
 clock = pygame.time.Clock()
 finished = False
+click = False
 
-Score = []
 while not finished:
-    clock.tick(FPS)
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            finished = True
-        elif event.type == pygame.MOUSEBUTTONDOWN:
-            def click():
-                print(x, y, r)
-            def coords():
-                for event in pygame.event.get():
-                    print(event.pos[0], event.pos[1])
-            def great():
-                if (((x - event.pos[0])**2) + ((y - event.pos[1])**2) + r**2) < 2 * r ** 2:
-                    print('Great')
-                    Score.append(1)
-                    print('счёт:', len(Score))
-                else:
-                    print('haha')
-            for line in f:
-                print('игрок1:', len(Score))
+    x = randint(100, 700)
+    y = randint(100, 500)
+    r = randint(30, 50)
+    color = COLORS[randint(0, 5)]
+    vx = cdvig[randint(0, 5)]
+    vy = cdvig[randint(0, 5)]
+    click = False
+    while (finished == False) and (click == False):
+        new_ball()
+        x = x + vx
+        y = y + vy
+        clock.tick(FPS)
+        if x+r >= maxx or x-r <= 0:
+            vx = vx * (-1)
+        if y+r >= maxy or y-r <= 0:
+            vy = vy * (-1)
 
-            click()
-            coords()
-            great()
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                finished = True
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                print(event.pos[0], event.pos[1])
+                if (x - event.pos[0]) ** 2 + (y - event.pos[1]) ** 2 <= r ** 2:
+                    score += 1
+                    print('счет ', score)
+                    click = True
+        pygame.display.update()
+        screen.fill(BLACK)
 
-
-
-
-
-
-    new_ball()
-    pygame.display.update()
-    screen.fill(BLACK)
-
-
-f.close()
 pygame.quit()
