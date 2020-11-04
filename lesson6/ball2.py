@@ -10,6 +10,7 @@ screen = pygame.display.set_mode((800, 700))
 maxx=800
 maxy=700
 
+#задаем цвета
 RED = (255, 0, 0)
 BLUE = (0, 0, 255)
 YELLOW = (255, 255, 0)
@@ -46,6 +47,7 @@ while not finished:
         new_ball()
         x = x + vx
         y = y + vy
+        #постоянная скорость цикла
         clock.tick(FPS)
         if x+r >= maxx or x-r <= 0:
             vx = vx * (-1)
